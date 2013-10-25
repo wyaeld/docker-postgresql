@@ -6,7 +6,8 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt
 #Instructions as per https://wiki.postgresql.org/wiki/Apt
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" >  /etc/apt/sources.list.d/pgdg.list
 
-RUN wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+RUN apt-get install wget
+RUN wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
 
 RUN apt-get -qq update
 RUN locale-gen en_US.UTF-8
