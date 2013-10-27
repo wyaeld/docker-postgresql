@@ -1,6 +1,8 @@
 # Postgres 9.3 install
 # $ docker run -d -p 5432:5432 -e POSTGRESQL_USER=docker -e POSTGRESQL_PASS=docker wyaeld/postgresql
 
+# VERSION 1.0 - 28/10/13
+
 FROM ubuntu:12.04
 MAINTAINER Brad Murray wyaeld@gmail.com
 
@@ -29,6 +31,9 @@ ADD postgresql.conf /etc/postgresql/9.3/main/postgresql.conf
 ADD pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 ADD run /usr/local/bin/run
 RUN chmod +x /usr/local/bin/run
+
+#Remove whichever proxy was used to build to ensure portability
+RUN rm /etc/apt/apt.conf.d/80proxy
 
 VOLUME ["/var/lib/postgresql"]
 EXPOSE 5432
