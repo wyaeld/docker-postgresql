@@ -1,5 +1,9 @@
+# Postgres 9.3 install
+# $ docker run -d -p 5432:5432 -e POSTGRESQL_USER=docker -e POSTGRESQL_PASS=docker wyaeld/postgresql
+
 FROM ubuntu:12.04
-MAINTAINER Ben Firshman "ben@orchardup.com"
+MAINTAINER Brad Murray wyaeld@gmail.com
+
 
 ADD home_proxy /etc/apt/apt.conf.d/80proxy
 #ADD datacom_proxy /etc/apt/apt.conf.d/80proxy
