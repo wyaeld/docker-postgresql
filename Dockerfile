@@ -1,6 +1,9 @@
 FROM ubuntu:12.04
 MAINTAINER Ben Firshman "ben@orchardup.com"
 
+ADD home_proxy /etc/apt/apt.conf.d/80proxy
+#ADD datacom_proxy /etc/apt/apt.conf.d/80proxy
+
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 
 #Instructions as per https://wiki.postgresql.org/wiki/Apt
