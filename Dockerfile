@@ -6,9 +6,7 @@
 FROM ubuntu:12.04
 MAINTAINER Brad Murray wyaeld@gmail.com
 
-
-ADD home_proxy /etc/apt/apt.conf.d/80proxy
-#ADD datacom_proxy /etc/apt/apt.conf.d/80proxy
+ENV DEBIAN_FRONTEND noninteractive 
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 
@@ -19,9 +17,8 @@ RUN apt-get install wget -y
 RUN wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
 
 RUN apt-get -qq update
-RUN locale-gen en_US.UTF-8
 
-RUN LC_ALL=en_US.UTF-8 DEBIAN_FRONTEND=noninteractive apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3 postgresql-9.3-postgis libpq-dev sudo
+RUN apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3 libpq-dev sudo
 
 # /etc/ssl/private can't be accessed from within container for some reason
 # (@andrewgodwin says it's something AUFS related)
@@ -31,9 +28,6 @@ ADD postgresql.conf /etc/postgresql/9.3/main/postgresql.conf
 ADD pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 ADD run /usr/local/bin/run
 RUN chmod +x /usr/local/bin/run
-
-#Remove whichever proxy was used to build to ensure portability
-RUN rm /etc/apt/apt.conf.d/80proxy
 
 VOLUME ["/var/lib/postgresql"]
 EXPOSE 5432
