@@ -1,12 +1,14 @@
 # Postgres 9.3 install
-# $ docker run -d -p 5432:5432 -e POSTGRESQL_USER=docker -e POSTGRESQL_PASS=docker wyaeld/postgresql
+# $ docker run -d -p 5432:5432 -e POSTGRESQL_USER=postgres -e POSTGRESQL_PASS=datacom01 wyaeld/postgresql
 
-# VERSION 1.0 - 28/10/13
+# VERSION 1.0.1 - 31/10/13
 
 FROM ubuntu:12.04
 MAINTAINER Brad Murray wyaeld@gmail.com
 
-ENV DEBIAN_FRONTEND noninteractive 
+RUN locale-gen en_US.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
+ENV LC_ALL=en_US.UTF-8
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 
@@ -16,9 +18,9 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" >  /et
 RUN apt-get install wget -y
 RUN wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
 
-RUN apt-get -qq update
+RUN apt-get -q update
 
-RUN apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3 libpq-dev sudo
+RUN apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3
 
 # /etc/ssl/private can't be accessed from within container for some reason
 # (@andrewgodwin says it's something AUFS related)
