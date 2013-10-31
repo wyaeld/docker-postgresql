@@ -8,7 +8,7 @@ MAINTAINER Brad Murray wyaeld@gmail.com
 
 RUN locale-gen en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
-ENV LC_ALL=en_US.UTF-8
+ENV LC_ALL =en_US.UTF-8
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 
