@@ -20,7 +20,7 @@ RUN wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt
 
 RUN apt-get -q update
 
-RUN apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3
+RUN apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3 sudo
 
 # /etc/ssl/private can't be accessed from within container for some reason
 # (@andrewgodwin says it's something AUFS related)
